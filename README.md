@@ -1,6 +1,6 @@
 # shoe_stores
 
-An app to implement a dribble design on https://dribbble.com/shots/20449197-Marketplace-Mobile-App-Concept-Tokosmile
+An app to implement a dribbble design on https://dribbble.com/shots/20449197-Marketplace-Mobile-App-Concept-Tokosmile
 
 ## Getting Started
 

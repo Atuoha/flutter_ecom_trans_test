@@ -10,7 +10,6 @@ import '../../resources/string_manager.dart';
 import '../../resources/styles_manager.dart';
 import '../../resources/values_manager.dart';
 
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -27,6 +26,23 @@ class _SplashScreenState extends State<SplashScreen> {
   //   await Future.delayed(const Duration(seconds:0));
   //   return  _pageController.page?.round() ?? 0;
   // }
+
+  void skipSlides() {
+    _pageController.animateToPage(
+      2,
+      duration: const Duration(seconds: 1),
+      curve: Curves.easeIn,
+    );
+  }
+
+  void nextSlide() {
+    currentPageIndex != 2
+        ? _pageController.nextPage(
+            duration: const Duration(seconds: 1),
+            curve: Curves.easeIn,
+          )
+        : Navigator.of(context).pushNamed(RouteManager.mainScreen);
+  }
 
   List<SplashItem> splashItems = [
     SplashItem(
@@ -49,6 +65,22 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        actions: [
+          TextButton(
+            onPressed: () => skipSlides(),
+            child: const Text(
+              'Skip',
+              style: TextStyle(
+                color: accentColor,
+              ),
+            ),
+          )
+        ],
+      ),
       body: PageView.builder(
         controller: _pageController,
         onPageChanged: (index) {
@@ -103,12 +135,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             ElevatedButton(
-              onPressed: () => currentPageIndex != 2
-                  ? _pageController.nextPage(
-                      duration: const Duration(seconds: 1),
-                      curve: Curves.easeIn,
-                    )
-                  : Navigator.of(context).pushNamed(RouteManager.mainScreen),
+              onPressed: () => nextSlide(),
               child: Text(
                 currentPageIndex != 2 ? 'Next' : 'Start Exploring',
               ),

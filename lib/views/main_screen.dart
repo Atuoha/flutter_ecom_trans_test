@@ -13,7 +13,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  var _pageIndex = 0;
+  var _currentPageIndex = 0;
   final List<Widget> _pages = const [
     CustomerHomeScreen(),
     VoucherScreen(),
@@ -23,7 +23,7 @@ class _MainScreenState extends State<MainScreen> {
 
   void setNewPage(int index) {
     setState(() {
-      _pageIndex = index;
+      _currentPageIndex = index;
     });
   }
 
@@ -31,15 +31,41 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home)),
-          BottomNavigationBarItem(icon: Icon(Icons.confirmation_number)),
-          BottomNavigationBarItem(icon: Icon(Icons.wallet)),
-          BottomNavigationBarItem(icon: Icon(Icons.settings)),
+        type: BottomNavigationBarType.fixed,
+        onTap: setNewPage,
+        currentIndex: _currentPageIndex,
+        selectedIconTheme: const IconThemeData(color: primaryColor),
+        unselectedIconTheme: IconThemeData(color: greyShade),
+        showUnselectedLabels: true,
+        selectedLabelStyle: const TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.w500,
+        ),
+        selectedItemColor: Colors.black,
+        unselectedLabelStyle: const TextStyle(
+          color: Colors.black,
+          // fontWeight: FontWeight.w300,
+        ),
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.confirmation_number),
+            label: 'Voucher',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.wallet),
+            label: 'Wallet',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
         ],
       ),
-      body: _pages[_pageIndex],
+      body: _pages[_currentPageIndex],
     );
   }
 }
