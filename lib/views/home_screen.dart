@@ -2,11 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:shoe_stores/resources/styles_manager.dart';
+import 'package:shoe_stores/views/widgets/carousel_single_slider.dart';
 import 'package:shoe_stores/views/widgets/cart_icon.dart';
 import 'package:shoe_stores/views/widgets/message_icon.dart';
 import 'package:shoe_stores/views/widgets/search_box.dart';
-import 'package:shoe_stores/views/widgets/welcome_intro.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../resources/values_manager.dart';
 import '../constants/color.dart';
 import '../models/carousel_item.dart';
@@ -61,6 +60,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
         title: SearchBox(searchText: searchText),
         actions: const [
           CartIcon(),
+          SizedBox(width: 10),
           MessageIcon(),
           SizedBox(width: 18),
         ],
@@ -70,73 +70,16 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
         children: [
           CarouselSlider.builder(
             itemCount: carouselItems.length,
-            itemBuilder: (context, index, i) => Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(carouselItems[index].imgSrc),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).padding.top,
-                    right: 18.0,
-                    left: 18.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          carouselItems[index].hashTag,
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: FontSize.s14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        DotsIndicator(
-                          dotsCount: carouselItems.length,
-                          position: currentCarouselIndex,
-                          decorator: DotsDecorator(
-                            color: Colors.grey,
-                            size: const Size.square(4.0),
-                            activeSize: const Size(18.0, 5.0),
-                            activeColor: accentColor,
-                            activeShape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(3.0),
-                            ),
-                            spacing: const EdgeInsets.only(right: 4),
-                          ),
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 5),
-                    Text(
-                      carouselItems[index].title,
-                      style: getBoldStyle(
-                        color: Colors.black,
-                        fontSize: FontSize.s40,
-                      ),
-                    ),
-                    const SizedBox(height: 5),
-                    Text(carouselItems[index].desc,
-                        style: const TextStyle(color: Colors.grey)),
-                    const SizedBox(height: AppSize.s10),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: accentColor,
-                      ),
-                      onPressed: () => checkItOut(),
-                      child: const Text('Check this out'),
-                    )
-                  ],
-                ),
-              ),
-            ),
+            itemBuilder: (context, index, i) {
+              var item = carouselItems[index];
+              return carouselSingleSlider(
+                item: item,
+                context: context,
+                carouselLength: carouselItems.length,
+                currentCarouselIndex: currentCarouselIndex,
+                action: checkItOut,
+              );
+            },
             options: CarouselOptions(
               onPageChanged: (index, reason) => setState(() {
                 currentCarouselIndex = index;
