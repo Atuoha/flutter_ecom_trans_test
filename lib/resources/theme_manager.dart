@@ -53,14 +53,15 @@ ThemeData getLightTheme() {
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSize.s8),
+
         ),
         backgroundColor: primaryColor,
         disabledBackgroundColor: accentColor,
         disabledForegroundColor: Colors.white,
         textStyle: getRegularStyle(
           color: Colors.white,
-          fontSize: FontSize.s16,
-          fontWeight: FontWeightManager.bold,
+          fontSize: FontSize.s14,
+          fontWeight: FontWeightManager.normal,
         ),
       ),
     ),

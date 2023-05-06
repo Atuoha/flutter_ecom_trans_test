@@ -9,6 +9,7 @@ import '../../resources/font_manager.dart';
 import '../../resources/string_manager.dart';
 import '../../resources/styles_manager.dart';
 import '../../resources/values_manager.dart';
+import '../widgets/smooth_indicator.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -70,15 +71,17 @@ class _SplashScreenState extends State<SplashScreen> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         actions: [
-          TextButton(
-            onPressed: () => skipSlides(),
-            child: const Text(
-              'Skip',
-              style: TextStyle(
-                color: accentColor,
-              ),
-            ),
-          )
+          currentPageIndex != splashItems.length - 1
+              ? TextButton(
+                  onPressed: () => skipSlides(),
+                  child: const Text(
+                    'Skip',
+                    style: TextStyle(
+                      color: accentColor,
+                    ),
+                  ),
+                )
+              : const SizedBox.shrink()
         ],
       ),
       body: PageView.builder(
@@ -116,28 +119,17 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SmoothPageIndicator(
-              controller: _pageController,
-              count: splashItems.length,
-              effect: CustomizableEffect(
-                activeDotDecoration: DotDecoration(
-                  width: 25,
-                  height: 3,
-                  color: primaryColor,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                dotDecoration: DotDecoration(
-                  width: 25,
-                  height: 3,
-                  color: greyShade,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
+            CustomSmoothIndicator(
+              pageController: _pageController,
+              itemCount: splashItems.length,
+              color: primaryColor,
             ),
             ElevatedButton(
               onPressed: () => nextSlide(),
               child: Text(
-                currentPageIndex != 2 ? 'Next' : 'Start Exploring',
+                currentPageIndex != splashItems.length - 1
+                    ? 'Next'
+                    : 'Start Exploring',
               ),
             )
           ],

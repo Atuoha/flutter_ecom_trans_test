@@ -12,7 +12,9 @@ const backgroundLite = Color(0XFFEFEEF3);
 const cardsLite = Color(0XFFFFFFFF);
 var greyShade =  Colors.grey.withOpacity(0.8);
 var greyShade2 = Colors.grey.shade300;
-const searchBoxBg =  Color(0XFFF3F3F3);
+const searchBorderBg =  Color(0XFFE8E8E8);
+
+const greyFontColor = Color(0XFFAFAEB4);
 
 var primaryOpacity = const Color(0xFF4CB298).withOpacity(0.8);
 const primaryLite =  Color(0xFFA8C1BF);

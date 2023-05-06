@@ -3,26 +3,26 @@ import 'package:flutter/material.dart';
 
 import '../../constants/color.dart';
 
-class CartIcon extends StatelessWidget {
-  const CartIcon({
+class MessageIcon extends StatelessWidget {
+  const MessageIcon({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Badge(
-      position: const BadgePosition(start: 20, bottom: 30),
+      position: const BadgePosition(start: 15, bottom: 30),
       badgeColor: notifBg,
       shape: BadgeShape.square,
       borderRadius: BorderRadius.circular(5),
-      padding: const EdgeInsets.fromLTRB(6, 0, 6, 2),
+      padding: const EdgeInsets.fromLTRB(5, 0, 5, 2),
       badgeContent: const Text(
-        '1',
+        '9+',
         style: TextStyle(color: Colors.white),
       ),
       showBadge: true,
       child: const Icon(
-        Icons.shopping_bag_outlined,
+        Icons.comment_outlined,
         color: accentColor,
       ),
     );

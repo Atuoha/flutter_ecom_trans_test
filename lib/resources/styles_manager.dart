@@ -74,14 +74,14 @@ TextStyle getBoldStyle({
 }
 
 // medium fontstyle
-// TextStyle getMediumStyle({
-//   fontSize = FontSize.s12,
-//   required Color color,
-// }) {
-//   return _getTextStyle(
-//     fontSize,
-//     FontConstants.fontFamily,
-//     color,
-//     FontWeightManager.medium,
-//   );
-// }
+TextStyle getMediumStyle({
+  fontSize = FontSize.s12,
+  required Color color,
+}) {
+  return _getTextStyle(
+    fontSize,
+    FontConstants.fontFamily,
+    color,
+    FontWeightManager.medium,
+  );
+}

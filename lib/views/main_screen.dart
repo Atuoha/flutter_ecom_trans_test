@@ -52,7 +52,7 @@ class _MainScreenState extends State<MainScreen> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.confirmation_number),
+            icon: Icon(Icons.confirmation_number_outlined),
             label: 'Voucher',
           ),
           BottomNavigationBarItem(
@@ -60,7 +60,7 @@ class _MainScreenState extends State<MainScreen> {
             label: 'Wallet',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
+            icon: Icon(Icons.settings_outlined),
             label: 'Settings',
           ),
         ],
