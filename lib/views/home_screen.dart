@@ -25,15 +25,28 @@ class CustomerHomeScreen extends StatefulWidget {
 class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
   final TextEditingController searchText = TextEditingController();
 
-  var currentCarouselIndex = 0;
+  final ScrollController _scrollController = ScrollController();
+  bool _isScrolled = false;
 
+  @override
+  void initState() {
+    super.initState();
+
+    _scrollController.addListener(() {
+      setState(() {
+        _isScrolled = _scrollController.offset > 0;
+      });
+    });
+  }
+
+  var currentCarouselIndex = 0;
   var currentIconSectionIndex = 0;
 
   final List<IconSection> iconSections = [
     IconSection(icon: Icons.grid_view, title: 'Category'),
     IconSection(icon: Icons.flight, title: 'Flight'),
     IconSection(icon: Icons.receipt, title: 'Bill'),
-    IconSection(icon: Icons.language, title: 'Data'),
+    IconSection(icon: Icons.language, title: 'Data plan'),
     IconSection(icon: Icons.monetization_on, title: 'Top Up'),
   ];
 
@@ -74,8 +87,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
+        backgroundColor: _isScrolled ? Colors.white : Colors.transparent,
         title: SearchBox(searchText: searchText),
         actions: const [
           CartIcon(),
@@ -85,53 +97,61 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
         ],
       ),
       backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          CarouselSlider.builder(
-            itemCount: carouselItems.length,
-            itemBuilder: (context, index, i) {
-              var item = carouselItems[index];
-              return carouselSingleSlider(
-                item: item,
-                context: context,
-                carouselLength: carouselItems.length,
-                currentCarouselIndex: currentCarouselIndex,
-                action: checkItOut,
-              );
-            },
-            options: CarouselOptions(
-              onPageChanged: (index, reason) => setState(() {
-                currentCarouselIndex = index;
-              }),
-              height: size.height / 2.5,
-              autoPlay: true,
-              enlargeCenterPage: false,
-              viewportFraction: 1,
-            ),
-          ),
-          const SizedBox(height: 10),
-          SizedBox(
-            height: size.height / 8,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: iconSections.length,
-              itemBuilder: (context, index) {
-                var item = iconSections[index];
-                return SingleIconSection(
+      body: SingleChildScrollView(
+        controller: _scrollController,
+        child: Column(
+          children: [
+            CarouselSlider.builder(
+              itemCount: carouselItems.length,
+              itemBuilder: (context, index, i) {
+                var item = carouselItems[index];
+                return carouselSingleSlider(
                   item: item,
-                  index: index,
-                  setCurrentIconSection: setCurrentIconSection,
-                  currentIconSectionIndex: currentIconSectionIndex,
+                  context: context,
+                  carouselLength: carouselItems.length,
+                  currentCarouselIndex: currentCarouselIndex,
+                  action: checkItOut,
                 );
               },
+              options: CarouselOptions(
+                onPageChanged: (index, reason) => setState(() {
+                  currentCarouselIndex = index;
+                }),
+                height: size.height / 2.5,
+                autoPlay: true,
+                enlargeCenterPage: false,
+                viewportFraction: 1,
+              ),
             ),
-          ),
-          const SizedBox(height: AppSize.s10),
-          KDotsIndicator(
-            dotsCount: carouselItems.length,
-            position: currentCarouselIndex,
-          )
-        ],
+            const SizedBox(height: 10),
+            SizedBox(
+              height: size.height / 8,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: iconSections.length,
+                itemBuilder: (context, index) {
+                  var item = iconSections[index];
+                  return SingleIconSection(
+                    item: item,
+                    index: index,
+                    setCurrentIconSection: setCurrentIconSection,
+                    currentIconSectionIndex: currentIconSectionIndex,
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: AppSize.s10),
+            KDotsIndicator(
+              dotsCount: carouselItems.length,
+              position: currentCarouselIndex,
+            ),
+            const SizedBox(height: 20),
+            Container(
+              height: size.height / 1.32,
+              color: boxBg,
+            ),
+          ],
+        ),
       ),
     );
   }
