@@ -15,6 +15,8 @@ var greyShade2 = Colors.grey.shade300;
 const searchBorderBg =  Color(0XFFE8E8E8);
 
 const greyFontColor = Color(0XFFAFAEB4);
+const boxBg = Color(0XFFF6F6F5);
+const iconColor = Color(0XFF4F5059);
 
 var primaryOpacity = const Color(0xFF4CB298).withOpacity(0.8);
 const primaryLite =  Color(0xFFA8C1BF);

@@ -23,7 +23,7 @@ class CartIcon extends StatelessWidget {
       showBadge: true,
       child: const Icon(
         Icons.shopping_bag_outlined,
-        color: accentColor,
+        color: iconColor,
       ),
     );
   }

@@ -23,7 +23,7 @@ class MessageIcon extends StatelessWidget {
       showBadge: true,
       child: const Icon(
         Icons.comment_outlined,
-        color: accentColor,
+        color: iconColor,
       ),
     );
   }
