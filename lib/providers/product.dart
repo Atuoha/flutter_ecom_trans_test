@@ -96,6 +96,7 @@ class Products with ChangeNotifier {
         arrival: 'Estimated arrival on 25-27 Oct 2023',
       ),
       rating: 4.5,
+      isFavorite: true,
     ),
     Product(
       id: 'p3',

@@ -1,5 +1,4 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shoe_stores/resources/styles_manager.dart';
@@ -9,6 +8,7 @@ import 'package:shoe_stores/views/widgets/k_dotsIndicator.dart';
 import 'package:shoe_stores/views/widgets/message_icon.dart';
 import 'package:shoe_stores/views/widgets/search_box.dart';
 import 'package:shoe_stores/views/widgets/single_icon_section.dart';
+import 'package:shoe_stores/views/widgets/single_product_grid.dart';
 import '../../resources/values_manager.dart';
 import '../constants/color.dart';
 import '../models/carousel_item.dart';
@@ -89,6 +89,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
     List<Product> products =
         Provider.of<Products>(context, listen: false).availableProducts;
 
+    var productsData = Provider.of<Products>(context);
     var categoryData = Provider.of<Categories>(context, listen: false);
 
     return Scaffold(
@@ -193,91 +194,10 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                         ),
                         itemBuilder: (context, index) {
                           Product item = products[index];
-                          return SizedBox(
-                            height: 200,
-                            child: Stack(
-                              children: [
-                                Container(
-                                  height: 105,
-                                  width: double.infinity,
-                                  decoration: const BoxDecoration(
-                                    color: imageBg,
-                                  ),
-                                  child: Image.asset(
-                                    item.imageUrl,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Positioned(
-                                  top: 8,
-                                  right: 5,
-                                  child: GestureDetector(
-                                    onTap: () => null,
-                                    child: Icon(
-                                      Icons.favorite_border,
-                                      color: iconColor,
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 25,
-                                  left: 10,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        categoryData.findById(item.catId).title,
-                                        style: getRegularStyle(
-                                          color: greyFontColor,
-                                        ),
-                                      ),
-                                      // const SizedBox(height: 3),
-                                      Text(
-                                        item.name,
-                                        style: getMediumStyle(
-                                          color: Colors.black87,
-                                          fontSize: FontSize.s14,
-                                        ),
-                                      ),
-                                      // const SizedBox(height: 25),
-                                    ],
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 0,
-                                  left: 10,
-                                  child: Wrap(
-                                    crossAxisAlignment:
-                                        WrapCrossAlignment.center,
-                                    children: [
-                                      const Icon(
-                                        Icons.star,
-                                        color: starBg,
-                                        size: 15,
-                                      ),
-                                      const SizedBox(width: 3),
-                                      Text(
-                                        '${item.rating} | ${item.soldNumber}',
-                                        style: getRegularStyle(
-                                          color: greyFontColor,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 0,
-                                  right: 5,
-                                  child: Text(
-                                    '\$${item.price}',
-                                    style: getMediumStyle(
-                                        color: primaryColor,
-                                        fontSize: FontSize.s16),
-                                  ),
-                                ),
-                              ],
-                            ),
+                          return SingleProductGrid(
+                            item: item,
+                            productsData: productsData,
+                            categoryData: categoryData,
                           );
                         },
                       ),
