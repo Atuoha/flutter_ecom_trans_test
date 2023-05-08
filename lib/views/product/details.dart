@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pinch_zoom/pinch_zoom.dart';
 import 'package:provider/provider.dart';
 import 'package:shoe_stores/resources/styles_manager.dart';
-
 import '../../constants/color.dart';
 import '../../models/product.dart';
 import '../../providers/cart.dart';
@@ -20,7 +18,7 @@ class ProductDetails extends StatefulWidget {
   State<ProductDetails> createState() => ProductDetailsState();
 }
 
-class ProductDetailsState extends State<ProductDetails> {
+class ProductDetailsState extends State<ProductDetails> with SingleTickerProviderStateMixin{
   var currentImageIndex = 0;
 
   void setImageIndex(int index) {

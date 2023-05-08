@@ -36,7 +36,7 @@ Container productDetailsImageSection(
           left: 10,
           child: SizedBox(
             height: size.height / 2.2,
-            width: size.width / 3.8,
+            width: size.width / 4.8,
             child: ListView.builder(
               padding: const EdgeInsets.all(10),
               itemCount: product.otherImgs.length,
@@ -45,8 +45,8 @@ Container productDetailsImageSection(
                 child: GestureDetector(
                   onTap: () => setImageIndex(index),
                   child: Container(
-                    height: 70,
-                    width: 30,
+                    height: 60,
+                    width: 20,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       color: otherImgsBg,
@@ -64,7 +64,7 @@ Container productDetailsImageSection(
                     ),
                     child: Image.asset(
                       product.otherImgs[index],
-                      fit: BoxFit.cover,
+                      // fit: BoxFit.cover,
                     ),
                   ),
                 ),
