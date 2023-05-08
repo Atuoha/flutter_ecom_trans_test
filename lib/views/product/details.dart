@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:pinch_zoom/pinch_zoom.dart';
 import 'package:provider/provider.dart';
+import 'package:shoe_stores/resources/styles_manager.dart';
 
 import '../../constants/color.dart';
 import '../../models/product.dart';
+import '../../providers/cart.dart';
 import '../../providers/product.dart';
+import '../../providers/stores.dart';
+import '../../resources/font_manager.dart';
 import '../widgets/cart_icon.dart';
+import '../widgets/product_details_bottom_sheet.dart';
+import '../widgets/product_details_img_section.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key});
@@ -30,8 +36,23 @@ class ProductDetailsState extends State<ProductDetails> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     String id = data['product_id'];
     var productData = Provider.of<Products>(context);
-
+    var storeData = Provider.of<Stores>(context);
+    var cartData = Provider.of<Cart>(context);
     Product product = productData.findById(id);
+
+    void addToCart() {
+      cartData.addItemToCart(
+        product.id,
+        product.name,
+        product.price,
+        product.imageUrl,
+      );
+    }
+
+    void buyNow() {
+      // Todo:
+      // Implement buyNow
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -61,72 +82,100 @@ class ProductDetailsState extends State<ProductDetails> {
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(18.0),
-        child: Container(
-          height: size.height / 2,
-          decoration: BoxDecoration(
-            color: boxBg,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child:
-
-                PinchZoom(
-                  child: Image.asset(
-                    product.otherImgs[currentImageIndex],
-                  ),
-                  resetDuration: const Duration(milliseconds: 100),
-                  maxScale: 2.5,
-                ),
-
-
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            productDetailsImageSection(
+              size,
+              product,
+              currentImageIndex,
+              setImageIndex,
+            ),
+            const SizedBox(height: 15),
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                const Icon(Icons.storefront, color: storeColor),
+                const SizedBox(width: 10),
+                Text(
+                  storeData.findById(product.storeId).name,
+                  style: getRegularStyle(color: storeColor),
+                )
+              ],
+            ),
+            const SizedBox(height: 10),
+            Text(
+              product.name,
+              style: getMediumStyle(
+                color: accentColor,
+                fontSize: FontSize.s20,
               ),
-              Positioned(
-                top: 10,
-                left: 10,
-                child: SizedBox(
-                  height: size.height / 2.2,
-                  width: size.width / 3.8,
-                  child: ListView.builder(
-                    padding: const EdgeInsets.all(10),
-                    itemCount: product.otherImgs.length,
-                    itemBuilder: (context, index) => Padding(
-                      padding: const EdgeInsets.only(bottom: 20.0),
-                      child: GestureDetector(
-                        onTap: () => setImageIndex(index),
-                        child: Container(
-                          height: 70,
-                          width: 30,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: otherImgsBg,
-                            boxShadow: [
-                              currentImageIndex == index
-                                  ? const BoxShadow(
-                                      color: accentColor,
-                                      blurRadius: 3,
-                                      spreadRadius: 7,
-                                      blurStyle: BlurStyle.outer,
-                                      offset: Offset(0, 3),
-                                    )
-                                  : const BoxShadow(),
-                            ],
-                          ),
-                          child: Image.asset(
-                            product.otherImgs[index],
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+            ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.star,
+                      color: starBg,
+                      // size: 15,
+                    ),
+                    const SizedBox(width: 3),
+                    Text(
+                      '${product.rating} Ratings',
+                      style: getRegularStyle(
+                        color: greyFontColor,
+                        fontWeight: FontWeight.w500,
+                        fontSize: FontSize.s16,
                       ),
                     ),
+                  ],
+                ),
+                Text(
+                  '•',
+                  style: getRegularStyle(
+                    color: greyFontColor,
+                    fontWeight: FontWeight.w500,
+                    fontSize: FontSize.s25,
                   ),
                 ),
-              )
-            ],
-          ),
+                Text(
+                  '${product.reviews.length}k Reviews',
+                  style: getRegularStyle(
+                    color: greyFontColor,
+                    fontWeight: FontWeight.w500,
+                    fontSize: FontSize.s16,
+                  ),
+                ),
+                Text(
+                  '•',
+                  style: getRegularStyle(
+                    color: greyFontColor,
+                    fontWeight: FontWeight.w500,
+                    fontSize: FontSize.s25,
+                  ),
+                ),
+                Text(
+                  '${product.soldNumber}k Sold',
+                  style: getRegularStyle(
+                    color: greyFontColor,
+                    fontWeight: FontWeight.w500,
+                    fontSize: FontSize.s16,
+                  ),
+                ),
+              ],
+            )
+          ],
         ),
+      ),
+      bottomSheet: ProductDetailsBottomSheet(
+        product: product,
+        cartData: cartData,
+        addToCart: addToCart,
+        buyNow: buyNow,
       ),
     );
   }

@@ -19,6 +19,7 @@ const imageBg = Color(0XFFF0F0F0);
 var gridBg = const  Color(0XFFF9F9F9);
 const starBg = Color(0XFFF39E3C);
 const otherImgsBg = Color(0XFFCBCBCC);
+const storeColor = Color(0XFFABACB1);
 
 var primaryOpacity = const Color(0xFF4CB298).withOpacity(0.8);
 const primaryLite = Color(0xFFA8C1BF);

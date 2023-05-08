@@ -38,9 +38,12 @@ class SingleProductGrid extends StatelessWidget {
                 topRight: Radius.circular(5),
               ),
             ),
-            child: Image.asset(
-              item.imageUrl,
-              fit: BoxFit.cover,
+            child: Hero(
+              tag: item.id,
+              child: Image.asset(
+                item.imageUrl,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Positioned(
@@ -123,8 +126,10 @@ class SingleProductGrid extends StatelessWidget {
             right: 5,
             child: Text(
               '\$${item.price}',
-              style:
-                  getMediumStyle(color: primaryColor, fontSize: FontSize.s16),
+              style: getMediumStyle(
+                color: primaryColor,
+                fontSize: FontSize.s16,
+              ),
             ),
           ),
         ],
