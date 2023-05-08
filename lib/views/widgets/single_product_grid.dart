@@ -33,6 +33,10 @@ class SingleProductGrid extends StatelessWidget {
             width: double.infinity,
             decoration: const BoxDecoration(
               color: imageBg,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(5),
+                topRight: Radius.circular(5),
+              ),
             ),
             child: Image.asset(
               item.imageUrl,
@@ -66,13 +70,15 @@ class SingleProductGrid extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: 25,
+            bottom: 20,
             left: 10,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   categoryData.findById(item.catId).title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: getRegularStyle(
                     color: greyFontColor,
                   ),
@@ -80,6 +86,8 @@ class SingleProductGrid extends StatelessWidget {
                 // const SizedBox(height: 3),
                 Text(
                   item.name,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: getMediumStyle(
                     color: Colors.black87,
                     fontSize: FontSize.s14,

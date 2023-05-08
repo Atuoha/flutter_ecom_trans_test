@@ -46,6 +46,7 @@ class Products with ChangeNotifier {
       storeId: '1',
       reviews: [1, 2, 3],
       otherImgs: [
+        'assets/images/shoe_imgs/1_1.png',
         'assets/images/shoe_imgs/1_2.png',
         'assets/images/shoe_imgs/1_3.png',
         'assets/images/shoe_imgs/1_4.png',
@@ -80,6 +81,7 @@ class Products with ChangeNotifier {
       storeId: '2',
       reviews: [1, 2, 3],
       otherImgs: [
+        'assets/images/shoe_imgs/2_1.png',
         'assets/images/shoe_imgs/2_2.png',
         'assets/images/shoe_imgs/2_3.png',
         'assets/images/shoe_imgs/2_4.png',
@@ -115,6 +117,7 @@ class Products with ChangeNotifier {
       storeId: '3',
       reviews: [1, 2, 3],
       otherImgs: [
+        'assets/images/shoe_imgs/3_1.png',
         'assets/images/shoe_imgs/3_2.png',
         'assets/images/shoe_imgs/3_3.png',
         'assets/images/shoe_imgs/3_4.png',
@@ -149,6 +152,7 @@ class Products with ChangeNotifier {
       storeId: '1',
       reviews: [1, 2, 3],
       otherImgs: [
+        'assets/images/shoe_imgs/4_1.png',
         'assets/images/shoe_imgs/4_2.png',
         'assets/images/shoe_imgs/4_3.png',
       ],
@@ -180,6 +184,7 @@ class Products with ChangeNotifier {
       storeId: '2',
       reviews: [1, 2, 3],
       otherImgs: [
+        'assets/images/shoe_imgs/5_1.png',
         'assets/images/shoe_imgs/5_2.png',
         'assets/images/shoe_imgs/5_3.png',
         'assets/images/shoe_imgs/5_4.png',
@@ -214,6 +219,7 @@ class Products with ChangeNotifier {
       storeId: '2',
       reviews: [1, 2, 3],
       otherImgs: [
+        'assets/images/shoe_imgs/6_1.png',
         'assets/images/shoe_imgs/6_2.png',
         'assets/images/shoe_imgs/6_3.png',
         'assets/images/shoe_imgs/6_4.png',
@@ -248,6 +254,7 @@ class Products with ChangeNotifier {
       storeId: '3',
       reviews: [1, 2, 3],
       otherImgs: [
+        'assets/images/shoe_imgs/7_1.png',
         'assets/images/shoe_imgs/8_3.png',
         'assets/images/shoe_imgs/7_3.png',
         'assets/images/shoe_imgs/7_4.png',
@@ -282,6 +289,7 @@ class Products with ChangeNotifier {
       storeId: '2',
       reviews: [1, 2, 3],
       otherImgs: [
+        'assets/images/shoe_imgs/11_1.png',
         'assets/images/shoe_imgs/11_2.png',
         'assets/images/shoe_imgs/11_3.png',
         'assets/images/shoe_imgs/11_8.png',
@@ -316,6 +324,7 @@ class Products with ChangeNotifier {
       storeId: '2',
       reviews: [1, 2, 3],
       otherImgs: [
+        'assets/images/shoe_imgs/12_1.png',
         'assets/images/shoe_imgs/12_2.png',
         'assets/images/shoe_imgs/12_3.png',
         'assets/images/shoe_imgs/12_5.png',
@@ -349,6 +358,7 @@ class Products with ChangeNotifier {
       storeId: '3',
       reviews: [1, 2, 3],
       otherImgs: [
+        'assets/images/shoe_imgs/13_1.png',
         'assets/images/shoe_imgs/13_2.png',
         'assets/images/shoe_imgs/13_3.png',
         'assets/images/shoe_imgs/13_4.png',

@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shoe_stores/controllers/route_manager.dart';
 import 'package:shoe_stores/resources/styles_manager.dart';
 import 'package:shoe_stores/views/widgets/carousel_single_slider.dart';
 import 'package:shoe_stores/views/widgets/cart_icon.dart';
@@ -196,11 +197,17 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                         ),
                         itemBuilder: (context, index) {
                           Product item = products[index];
-                          return SingleProductGrid(
-                            item: item,
-                            productsData: productsData,
-                            categoryData: categoryData,
-                            cartData:cartData,
+                          return GestureDetector(
+                            onTap: () => Navigator.of(context).pushNamed(
+                              RouteManager.productDetails,
+                              arguments: {'product_id': item.id},
+                            ),
+                            child: SingleProductGrid(
+                              item: item,
+                              productsData: productsData,
+                              categoryData: categoryData,
+                              cartData: cartData,
+                            ),
                           );
                         },
                       ),
