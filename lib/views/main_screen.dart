@@ -65,6 +65,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
       ),
+      backgroundColor: Colors.white,
       body: _pages[_currentPageIndex],
     );
   }

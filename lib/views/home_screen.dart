@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shoe_stores/resources/styles_manager.dart';
 import 'package:shoe_stores/views/widgets/carousel_single_slider.dart';
 import 'package:shoe_stores/views/widgets/cart_icon.dart';
@@ -12,6 +13,9 @@ import '../../resources/values_manager.dart';
 import '../constants/color.dart';
 import '../models/carousel_item.dart';
 import '../models/icon_section.dart';
+import '../models/product.dart';
+import '../providers/category.dart';
+import '../providers/product.dart';
 import '../resources/assets_manager.dart';
 import '../resources/font_manager.dart';
 
@@ -82,6 +86,10 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    List<Product> products =
+        Provider.of<Products>(context, listen: false).availableProducts;
+
+    var categoryData = Provider.of<Categories>(context, listen: false);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -148,7 +156,135 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
             const SizedBox(height: 20),
             Container(
               height: size.height / 1.32,
-              color: boxBg,
+              color: gridBg,
+              child: Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Best Sale Product',
+                          style: getMediumStyle(
+                            color: accentColor,
+                            fontSize: FontSize.s16,
+                          ),
+                        ),
+                        Text(
+                          'See more',
+                          style: getMediumStyle(
+                            color: primaryColor,
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      height: size.height / 1.49,
+                      child: GridView.builder(
+                        itemCount: products.length,
+                        padding: const EdgeInsets.only(top: 10),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 30,
+                          crossAxisSpacing: 15,
+                        ),
+                        itemBuilder: (context, index) {
+                          Product item = products[index];
+                          return SizedBox(
+                            height: 200,
+                            child: Stack(
+                              children: [
+                                Container(
+                                  height: 105,
+                                  width: double.infinity,
+                                  decoration: const BoxDecoration(
+                                    color: imageBg,
+                                  ),
+                                  child: Image.asset(
+                                    item.imageUrl,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 8,
+                                  right: 5,
+                                  child: GestureDetector(
+                                    onTap: () => null,
+                                    child: Icon(
+                                      Icons.favorite_border,
+                                      color: iconColor,
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  bottom: 25,
+                                  left: 10,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        categoryData.findById(item.catId).title,
+                                        style: getRegularStyle(
+                                          color: greyFontColor,
+                                        ),
+                                      ),
+                                      // const SizedBox(height: 3),
+                                      Text(
+                                        item.name,
+                                        style: getMediumStyle(
+                                          color: Colors.black87,
+                                          fontSize: FontSize.s14,
+                                        ),
+                                      ),
+                                      // const SizedBox(height: 25),
+                                    ],
+                                  ),
+                                ),
+                                Positioned(
+                                  bottom: 0,
+                                  left: 10,
+                                  child: Wrap(
+                                    crossAxisAlignment:
+                                        WrapCrossAlignment.center,
+                                    children: [
+                                      const Icon(
+                                        Icons.star,
+                                        color: starBg,
+                                        size: 15,
+                                      ),
+                                      const SizedBox(width: 3),
+                                      Text(
+                                        '${item.rating} | ${item.soldNumber}',
+                                        style: getRegularStyle(
+                                          color: greyFontColor,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Positioned(
+                                  bottom: 0,
+                                  right: 5,
+                                  child: Text(
+                                    '\$${item.price}',
+                                    style: getMediumStyle(
+                                        color: primaryColor,
+                                        fontSize: FontSize.s16),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
         ),

@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
-
 import '../models/cart_item.dart';
 
 class Cart extends ChangeNotifier {
