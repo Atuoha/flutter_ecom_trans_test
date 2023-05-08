@@ -32,7 +32,6 @@ class Cart extends ChangeNotifier {
               id: existingCartItem.id,
               name: existingCartItem.name,
               price: existingCartItem.price,
-              previousPrice: existingCartItem.previousPrice,
               imageUrl: existingCartItem.imageUrl,
               quantity: existingCartItem.quantity + 1,
             ),
@@ -48,7 +47,6 @@ class Cart extends ChangeNotifier {
               id: existingCartItem.id,
               name: existingCartItem.name,
               price: existingCartItem.price,
-              previousPrice: existingCartItem.previousPrice,
               imageUrl: existingCartItem.imageUrl,
               quantity: existingCartItem.quantity - 1,
             ),
@@ -65,17 +63,14 @@ class Cart extends ChangeNotifier {
     notifyListeners();
   }
 
-void addItemToCart(String productID, String name, double price,
-      double previousPrice, String imageUrl)  {
+  void addItemToCart(
+      String productID, String name, double price, String imageUrl) {
     if (_items.containsKey(productID)) {
       // increase quantity
 
       // Am checking using isItemOnCart to know if a user click on an already added to cart item.
       if (isItemOnCart(productID)) {
-        // This operation can only be performed if the user want the item to be removed from the cart so if it is so, the item will be removed from the cart
-        try {
-          _items.remove(productID);
-        } catch (e) {}
+        _items.remove(productID);
       } else {
         _items.update(
           productID,
@@ -84,7 +79,6 @@ void addItemToCart(String productID, String name, double price,
             id: existingCartItem.id,
             name: existingCartItem.name,
             price: existingCartItem.price,
-            previousPrice: existingCartItem.previousPrice,
             imageUrl: existingCartItem.imageUrl,
             quantity: existingCartItem.quantity + 1,
           ),
@@ -99,7 +93,6 @@ void addItemToCart(String productID, String name, double price,
           id: DateTime.now().toString(),
           name: name,
           price: price,
-          previousPrice: previousPrice,
           quantity: 1,
           imageUrl: imageUrl,
         ),

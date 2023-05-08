@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../constants/color.dart';
 import '../../models/product.dart';
+import '../../providers/cart.dart';
 import '../../providers/category.dart';
 import '../../providers/product.dart';
 import '../../resources/font_manager.dart';
 import '../../resources/styles_manager.dart';
-
 
 class SingleProductGrid extends StatelessWidget {
   const SingleProductGrid({
@@ -14,11 +14,13 @@ class SingleProductGrid extends StatelessWidget {
     required this.item,
     required this.productsData,
     required this.categoryData,
+    required this.cartData,
   }) : super(key: key);
 
   final Product item;
   final Products productsData;
   final Categories categoryData;
+  final Cart cartData;
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +42,27 @@ class SingleProductGrid extends StatelessWidget {
           Positioned(
             top: 8,
             right: 5,
-            child: GestureDetector(
-              onTap: () => productsData.toggleIsFavorite(item.id),
-              child: Icon(
-                item.isFavorite ? Icons.favorite : Icons.favorite_border,
-                color: item.isFavorite ? notifBg : iconColor,
-              ),
+            child: Column(
+              children: [
+                GestureDetector(
+                  onTap: () => productsData.toggleIsFavorite(item.id),
+                  child: Icon(
+                    item.isFavorite ? Icons.favorite : Icons.favorite_border,
+                    color: item.isFavorite ? notifBg : iconColor,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                GestureDetector(
+                  onTap: () => cartData.addItemToCart(
+                      item.id, item.name, item.price, item.imageUrl),
+                  child: Icon(
+                    cartData.isItemOnCart(item.id)
+                        ? Icons.shopping_bag
+                        : Icons.shopping_bag_outlined,
+                    color: cartData.isItemOnCart(item.id) ? notifBg : iconColor,
+                  ),
+                ),
+              ],
             ),
           ),
           Positioned(
@@ -55,9 +72,7 @@ class SingleProductGrid extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  categoryData
-                      .findById(item.catId)
-                      .title,
+                  categoryData.findById(item.catId).title,
                   style: getRegularStyle(
                     color: greyFontColor,
                   ),
@@ -101,7 +116,7 @@ class SingleProductGrid extends StatelessWidget {
             child: Text(
               '\$${item.price}',
               style:
-              getMediumStyle(color: primaryColor, fontSize: FontSize.s16),
+                  getMediumStyle(color: primaryColor, fontSize: FontSize.s16),
             ),
           ),
         ],

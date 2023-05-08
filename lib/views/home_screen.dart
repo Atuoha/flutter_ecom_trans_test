@@ -14,6 +14,7 @@ import '../constants/color.dart';
 import '../models/carousel_item.dart';
 import '../models/icon_section.dart';
 import '../models/product.dart';
+import '../providers/cart.dart';
 import '../providers/category.dart';
 import '../providers/product.dart';
 import '../resources/assets_manager.dart';
@@ -90,6 +91,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
         Provider.of<Products>(context, listen: false).availableProducts;
 
     var productsData = Provider.of<Products>(context);
+    var cartData = Provider.of<Cart>(context);
     var categoryData = Provider.of<Categories>(context, listen: false);
 
     return Scaffold(
@@ -198,6 +200,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                             item: item,
                             productsData: productsData,
                             categoryData: categoryData,
+                            cartData:cartData,
                           );
                         },
                       ),
