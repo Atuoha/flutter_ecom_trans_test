@@ -37,5 +37,5 @@ class AssetManager {
   static const String emptyStar = "$imagePath/empty_star.png";
 
 
-  static const String success = "$imagePath/success.png";
+  static const String success = "$imagePath/success.gif";
 }

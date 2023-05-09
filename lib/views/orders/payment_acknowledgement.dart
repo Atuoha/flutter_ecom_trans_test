@@ -21,7 +21,7 @@ class PaymentAcknowledgementScreenState
         leading: Builder(
           builder: (context) {
             return GestureDetector(
-              onTap: () => Navigator.of(context).pop(),
+              onTap: () =>  Navigator.of(context).pushNamed(RouteManager.mainScreen),
               child: const Icon(
                 Icons.chevron_left,
                 color: iconColor,
@@ -41,14 +41,11 @@ class PaymentAcknowledgementScreenState
                 'You have successfully completed this :)',
                 style: TextStyle(
                   fontSize: 15,
+                  color:greyFontColor,
                 ),
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () =>
-                    Navigator.of(context).pushNamed(RouteManager.mainScreen),
-                child: const Text('Go back'),
-              )
+
             ],
           ),
         ),
