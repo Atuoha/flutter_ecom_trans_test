@@ -6,6 +6,7 @@ import '../../constants/enums/status.dart';
 import '../../controllers/route_manager.dart';
 import '../../providers/cart.dart';
 import '../../providers/orders.dart';
+import '../../resources/assets_manager.dart';
 import '../../resources/font_manager.dart';
 import '../widgets/cart_icon.dart';
 import '../widgets/single_cart_item.dart';
@@ -62,12 +63,17 @@ class CartScreenState extends State<CartScreen> {
       body: Padding(
         padding: const EdgeInsets.all(18.0),
         child: cartData.items.isEmpty
-            ? const Center(
-                child: Text(
-                  'Opps! Your cart list is empty',
-                  style: TextStyle(
-                    fontSize: 15,
-                  ),
+            ? Center(
+                child: Column(
+                  children: [
+                    Image.asset(AssetManager.empty),
+                    const Text(
+                      'Opps! Your cart list is empty',
+                      style: TextStyle(
+                        fontSize: 15,
+                      ),
+                    ),
+                  ],
                 ),
               )
             : ListView.builder(

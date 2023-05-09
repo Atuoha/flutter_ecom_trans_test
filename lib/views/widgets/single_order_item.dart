@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shoe_stores/constants/color.dart';
+import 'package:shoe_stores/views/widgets/text_action.dart';
 import '../../constants/enums/yes_no.dart';
 import '../../models/order_item.dart';
 import '../../providers/orders.dart';
@@ -30,27 +31,7 @@ class SingleOrderItem extends StatefulWidget {
 class _SingleOrderItemState extends State<SingleOrderItem> {
   var _isExpanded = false;
 
-  Widget textAction(String text, YesNo operation) {
-    return ElevatedButton(
-      child: Text(
-        text,
-        style: const TextStyle(
-          color: Colors.white,
-        ),
-      ),
-      onPressed: () {
-        switch (operation) {
-          case YesNo.no:
-            Navigator.of(context).pop(false);
-            break;
-          case YesNo.yes:
-            Navigator.of(context).pop(true);
-            break;
-          default:
-        }
-      },
-    );
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -74,8 +55,8 @@ class _SingleOrderItemState extends State<SingleOrderItem> {
             ),
           ),
           actions: [
-            textAction('Yes', YesNo.yes),
-            textAction('No', YesNo.no),
+            textAction('Yes', YesNo.yes,context),
+            textAction('No', YesNo.no,context),
           ],
         ),
       ),

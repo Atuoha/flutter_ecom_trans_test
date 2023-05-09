@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
+import 'package:shoe_stores/resources/assets_manager.dart';
 import 'package:shoe_stores/resources/styles_manager.dart';
 import '../../constants/color.dart';
 import '../../controllers/route_manager.dart';
@@ -428,12 +430,66 @@ class ProductDetailsState extends State<ProductDetails>
                     ),
 
                     // Widgets for the second tab go here
-                    SizedBox(
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15.0),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Center(
-                            child: Text('Tab 2 Content'),
+                          Text(
+                            'Review & Ratings:',
+                            style: getMediumStyle(
+                              color: accentColor,
+                              fontSize: FontSize.s16,
+                            ),
                           ),
+                          const SizedBox(height: 20),
+                          Row(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Wrap(
+                                    crossAxisAlignment: WrapCrossAlignment.end,
+                                    children: [
+                                      Text(
+                                        product.rating.toString(),
+                                        style: getBoldStyle(
+                                          color: accentColor,
+                                          fontSize: FontSize.s50,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Text(
+                                        '/ 5.0',
+                                        style: getRegularStyle(
+                                          color: greyFontColor,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  RatingBar(
+                                    initialRating: product.rating,
+                                    direction: Axis.horizontal,
+                                    allowHalfRating: true,
+                                    itemSize: 20,
+                                    itemCount: 5,
+                                    ratingWidget: RatingWidget(
+                                      full: Image.asset(AssetManager.fullStar),
+                                      half: Image.asset(AssetManager.halfStar),
+                                      empty:
+                                          Image.asset(AssetManager.emptyStar),
+                                    ),
+                                    itemPadding:
+                                        const EdgeInsets.only(right: 1.0),
+                                    onRatingUpdate: (double value) {},
+                                  ),
+                                 const SizedBox(height: 30),
+                                  Text('${product.reviews.length}k Reviews')
+                                ],
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ),

@@ -44,6 +44,11 @@ class OrderDownSummary extends StatelessWidget {
               ),
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 15,
+                ),
+              ),
               onPressed: () => orderNow(),
               child: Wrap(
                 crossAxisAlignment: WrapCrossAlignment.center,

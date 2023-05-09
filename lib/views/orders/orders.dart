@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shoe_stores/views/widgets/snack_msg.dart';
 import '../../constants/color.dart';
 import '../../constants/enums/status.dart';
+import '../../controllers/route_manager.dart';
 import '../../providers/orders.dart';
 import '../widgets/order_down_summary.dart';
 import '../widgets/single_order_item.dart';
@@ -16,18 +17,14 @@ class OrdersScreen extends StatefulWidget {
 }
 
 class _OrdersScreenState extends State<OrdersScreen> {
-  void orderNow() {
-    // Todo: Implement Order
-    displaySnackBar(
-      status: Status.success,
-      message: 'Opps! This is a demo :)',
-      context: context,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final orderData = Provider.of<Orders>(context, listen: false);
+
+    void orderNow() {
+      orderData.clearOrder();
+      Navigator.of(context).pushNamed(RouteManager.paymentAcknowledgement);
+    }
 
     return Scaffold(
       backgroundColor: Colors.white,

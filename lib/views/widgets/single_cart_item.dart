@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:shoe_stores/views/widgets/text_action.dart';
 import '../../constants/color.dart';
 import '../../constants/enums/yes_no.dart';
 import '../../controllers/route_manager.dart';
@@ -20,28 +20,6 @@ class SingleCartItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget textAction(String text, YesNo operation) {
-      return ElevatedButton(
-        child: Text(
-          text,
-          style: const TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        onPressed: () {
-          switch (operation) {
-            case YesNo.no:
-              Navigator.of(context).pop(false);
-              break;
-            case YesNo.yes:
-              Navigator.of(context).pop(true);
-              break;
-            default:
-          }
-        },
-      );
-    }
-
     return Dismissible(
       key: ValueKey(item.id),
       confirmDismiss: (direction) => showDialog(
@@ -63,8 +41,8 @@ class SingleCartItem extends StatelessWidget {
             ),
           ),
           actions: [
-            textAction('Yes', YesNo.yes),
-            textAction('No', YesNo.no),
+            textAction('Yes', YesNo.yes, context),
+            textAction('No', YesNo.no, context),
           ],
         ),
       ),
