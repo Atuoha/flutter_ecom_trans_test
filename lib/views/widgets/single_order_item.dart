@@ -7,6 +7,7 @@ import '../../models/order_item.dart';
 import '../../providers/orders.dart';
 import '../../resources/font_manager.dart';
 import '../../resources/styles_manager.dart';
+import 'package:intl/intl.dart';
 
 class SingleOrderItem extends StatefulWidget {
   const SingleOrderItem({
@@ -108,8 +109,8 @@ class _SingleOrderItemState extends State<SingleOrderItem> {
               title: Text('\$${widget.totalAmount.toStringAsFixed(2)}',
                   style: const TextStyle(fontSize: 20)),
               subtitle: Text(
-                  // DateFormat(' dd MMM yyy hh:mma').format(widget.date),
-                  '09-05-2022 3:53pm'),
+                DateFormat(' dd MMM yyy hh:mma').format(widget.date),
+              ),
               leading: const Icon(Icons.shopping_bag),
               trailing: IconButton(
                 icon: Icon(
