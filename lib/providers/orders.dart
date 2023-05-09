@@ -3,16 +3,14 @@ import '../models/cart_item.dart';
 import '../models/order_item.dart';
 import 'cart.dart';
 
-
-
 class Orders extends ChangeNotifier {
-   List<OrderItem> _orders = [];
+  final List<OrderItem> _orders = [];
 
   List<OrderItem> get orders {
     return [..._orders];
   }
 
- void addOrder(double totalAmount, List<CartItem> products)  {
+  void addOrder(double totalAmount, List<CartItem> products) {
     var newOrder = OrderItem(
       id: DateTime.now().toString(),
       products: products,

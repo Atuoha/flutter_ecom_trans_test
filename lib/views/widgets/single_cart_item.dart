@@ -68,7 +68,7 @@ class SingleCartItem extends StatelessWidget {
           ],
         ),
       ),
-      onDismissed: (direction) => cartData.removeFromCart(item.id),
+      onDismissed: (direction) => cartData.removeFromCart(item.productId),
       direction: DismissDirection.endToStart,
       background: Container(
         height: 115,
