@@ -70,6 +70,7 @@ class Cart extends ChangeNotifier {
 
       // Am checking using isItemOnCart to know if a user click on an already added to cart item.
       if (isItemOnCart(productID)) {
+        // This operation can only be performed if the user want the item to be removed from the cart so if it is so, the item will be removed from the cart
         _items.remove(productID);
       } else {
         _items.update(

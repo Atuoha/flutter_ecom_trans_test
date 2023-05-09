@@ -3,18 +3,11 @@ import 'package:provider/provider.dart';
 import 'package:shoe_stores/resources/styles_manager.dart';
 import '../../constants/color.dart';
 import '../../controllers/route_manager.dart';
-import '../../models/product.dart';
 import '../../models/store.dart';
-import '../../providers/cart.dart';
-import '../../providers/category.dart';
 import '../../providers/product.dart';
 import '../../providers/stores.dart';
 import '../../resources/font_manager.dart';
-import '../widgets/cart_icon.dart';
-import '../widgets/k_wrap.dart';
-import '../widgets/product_details_bottom_sheet.dart';
-import '../widgets/product_details_img_section.dart';
-import 'package:readmore/readmore.dart';
+
 
 class StoreDetails extends StatefulWidget {
   const StoreDetails({super.key});
