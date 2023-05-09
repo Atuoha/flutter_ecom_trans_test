@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shoe_stores/resources/styles_manager.dart';
 import '../../constants/color.dart';
+import '../../controllers/route_manager.dart';
 import '../../models/product.dart';
 import '../../providers/cart.dart';
 import '../../providers/category.dart';
@@ -63,6 +64,14 @@ class ProductDetailsState extends State<ProductDetails>
     // remove from cart
     void removeFromCart() {
       cartData.removeFromCart(product.id);
+    }
+
+    // navigate to store
+    void navigateToStore() {
+      Navigator.of(context).pushNamed(
+        RouteManager.storeScreen,
+        arguments: {'store_id': product.storeId},
+      );
     }
 
     return Scaffold(
@@ -200,7 +209,7 @@ class ProductDetailsState extends State<ProductDetails>
                 labelStyle: const TextStyle(fontWeight: FontWeight.w700),
               ),
               SizedBox(
-                height: size.height / 1,
+                height: size.height * 2,
                 child: TabBarView(
                   controller: _tabController,
                   children: [
@@ -280,8 +289,8 @@ class ProductDetailsState extends State<ProductDetails>
                             trimLines: 2,
                             colorClickableText: Colors.pink,
                             trimMode: TrimMode.Line,
-                            trimCollapsedText: 'Show more',
-                            trimExpandedText: 'Show less',
+                            trimCollapsedText: 'Show more ⌄',
+                            trimExpandedText: 'Show less ^',
                             style: getRegularStyle(
                               color: greyFontColor,
                               fontSize: FontSize.s16,
@@ -340,6 +349,80 @@ class ProductDetailsState extends State<ProductDetails>
                               )
                             ],
                           ),
+                          const SizedBox(height: 30),
+                          const Divider(
+                            color: storeColor,
+                            thickness: 0.4,
+                          ),
+                          const SizedBox(height: 30),
+                          Text(
+                            'Seller Information:',
+                            style: getMediumStyle(
+                              color: accentColor,
+                              fontSize: FontSize.s16,
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Hero(
+                                tag: product.storeId,
+                                child: CircleAvatar(
+                                  radius: 35,
+                                  backgroundImage: AssetImage(
+                                    storeData.findById(product.storeId).imgUrl,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 15),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    storeData.findById(product.storeId).name,
+                                    style: getMediumStyle(
+                                      color: accentColor,
+                                      fontSize: FontSize.s18,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    'Active 5m ago | 94.3 Positive feedback',
+                                    style: getRegularStyle(
+                                      color: greyFontColor,
+                                      fontSize: FontSize.s14,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.white,
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 15, vertical: 5),
+                                        side: const BorderSide(
+                                            color: primaryColor)),
+                                    onPressed: () => navigateToStore(),
+                                    child: Wrap(
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.center,
+                                      children: [
+                                        const Icon(Icons.storefront,
+                                            color: primaryColor),
+                                        const SizedBox(width: 10),
+                                        Text(
+                                          'Visit store',
+                                          style: getRegularStyle(
+                                            color: primaryColor,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ),

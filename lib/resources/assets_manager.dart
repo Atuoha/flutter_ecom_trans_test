@@ -13,9 +13,9 @@ class AssetManager {
   static const String empty = "$imagePath/empty.png";
 
   // stores
-  static const String store1 = "$imagePath/shop_imgs/store1.jpg";
-  static const String store2 = "$imagePath/shop_imgs/store2.jpg";
-  static const String store3 = "$imagePath/shop_imgs/store3.jpg";
+  static const String store1 = "$imagePath/shop_imgs/shop1.jpg";
+  static const String store2 = "$imagePath/shop_imgs/shop2.jpg";
+  static const String store3 = "$imagePath/shop_imgs/shop3.jpg";
 
   // slides
   static const String slider1 = "$imagePath/slider_imgs/slider1.jpg";

@@ -28,6 +28,15 @@ class Products with ChangeNotifier {
     return _availableProducts.where((product) => product.isFavorite).toList();
   }
 
+  List<Product> recommendProducts(String prodId) {
+    return availableProducts.where((product) => product.id == prodId).toList();
+  }
+
+
+  List<Product> storeProducts(String storeId) {
+    return availableProducts.where((product) => product.storeId == storeId).toList();
+  }
+
   final List<Product> _availableProducts = [
     Product(
       id: 'p1',
