@@ -15,7 +15,7 @@ class CartIcon extends StatelessWidget {
     var cartData = Provider.of<Cart>(context);
 
     return Badge(
-      position: const BadgePosition(start: 20, bottom: 30),
+      position: const BadgePosition(start: 15, bottom: 30),
       badgeColor: notifBg,
       shape: BadgeShape.square,
       borderRadius: BorderRadius.circular(5),
@@ -28,6 +28,7 @@ class CartIcon extends StatelessWidget {
       child: const Icon(
         Icons.shopping_bag_outlined,
         color: iconColor,
+        size:30,
       ),
     );
   }

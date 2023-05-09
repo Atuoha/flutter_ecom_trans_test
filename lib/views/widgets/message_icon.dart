@@ -24,6 +24,7 @@ class MessageIcon extends StatelessWidget {
       child: const Icon(
         Icons.comment_outlined,
         color: iconColor,
+        size:30,
       ),
     );
   }

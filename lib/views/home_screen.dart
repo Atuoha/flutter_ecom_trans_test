@@ -197,7 +197,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                         ),
                         itemBuilder: (context, index) {
                           Product item = products[index];
-                          return GestureDetector(
+                          return InkWell(
                             onTap: () => Navigator.of(context).pushNamed(
                               RouteManager.productDetails,
                               arguments: {'product_id': item.id},

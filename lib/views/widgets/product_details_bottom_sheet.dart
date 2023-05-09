@@ -14,13 +14,13 @@ class ProductDetailsBottomSheet extends StatelessWidget {
     required this.product,
     required this.cartData,
     required this.addToCart,
-    required this.buyNow,
+    required this.removeFromCart,
   }) : super(key: key);
 
   final Product product;
   final Cart cartData;
   final Function addToCart;
-  final Function buyNow;
+  final Function removeFromCart;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class ProductDetailsBottomSheet extends StatelessWidget {
                   style: getRegularStyle(
                     color: greyFontColor,
                     fontWeight: FontWeight.w500,
-                    fontSize: FontSize.s16,
+                    fontSize: FontSize.s14,
                   ),
                 ),
                 const SizedBox(height: 5),
@@ -88,7 +88,7 @@ class ProductDetailsBottomSheet extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () => cartData.isItemOnCart(product.id)
-                      ? buyNow()
+                      ? removeFromCart()
                       : addToCart(),
                   child: Container(
                     height: 50,
@@ -103,7 +103,7 @@ class ProductDetailsBottomSheet extends StatelessWidget {
                     child: Center(
                       child: Text(
                         cartData.isItemOnCart(product.id)
-                            ? 'Buy Now'
+                            ? 'Remove From Cart'
                             : 'Add To Cart',
                         style: getMediumStyle(
                           color: Colors.white,

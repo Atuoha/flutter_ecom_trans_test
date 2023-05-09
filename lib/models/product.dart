@@ -10,6 +10,9 @@ class Product with ChangeNotifier {
   final String colorName;
   final String catId;
   final String imageUrl;
+  final String material;
+  final String condition;
+  final String heavy;
   final List<String> otherImgs;
   final String description;
   final List<String> descriptionList;
@@ -26,6 +29,9 @@ class Product with ChangeNotifier {
     required this.name,
     required this.brandName,
     required this.catId,
+    required this.material,
+    required this.condition,
+    required this.heavy,
     required this.imageUrl,
     required this.otherImgs,
     required this.description,

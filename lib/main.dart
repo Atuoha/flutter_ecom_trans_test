@@ -43,6 +43,7 @@ class MyApp extends StatelessWidget {
         title: 'Shoe\'s Store',
         home: const EntryScreen(),
         routes: routes,
+
       ),
     );
   }

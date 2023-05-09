@@ -45,6 +45,9 @@ class Products with ChangeNotifier {
       price: 30.90,
       storeId: '1',
       reviews: [1, 2, 3],
+      condition: 'New',
+      heavy: '400g',
+      material: 'Leather',
       otherImgs: [
         'assets/images/shoe_imgs/1_1.png',
         'assets/images/shoe_imgs/1_2.png',
@@ -80,6 +83,9 @@ class Products with ChangeNotifier {
       price: 20.90,
       storeId: '2',
       reviews: [1, 2, 3],
+      condition: 'New',
+      heavy: '300g',
+      material: 'Fiber',
       otherImgs: [
         'assets/images/shoe_imgs/2_1.png',
         'assets/images/shoe_imgs/2_2.png',
@@ -116,6 +122,9 @@ class Products with ChangeNotifier {
       price: 60.90,
       storeId: '3',
       reviews: [1, 2, 3],
+      condition: 'New',
+      heavy: '200g',
+      material: 'Leather',
       otherImgs: [
         'assets/images/shoe_imgs/3_1.png',
         'assets/images/shoe_imgs/3_2.png',
@@ -151,6 +160,9 @@ class Products with ChangeNotifier {
       price: 90.90,
       storeId: '1',
       reviews: [1, 2, 3],
+      condition: 'New',
+      heavy: '100g',
+      material: 'Silk',
       otherImgs: [
         'assets/images/shoe_imgs/4_1.png',
         'assets/images/shoe_imgs/4_2.png',
@@ -183,6 +195,9 @@ class Products with ChangeNotifier {
       price: 50.90,
       storeId: '2',
       reviews: [1, 2, 3],
+      condition: 'New',
+      heavy: '120g',
+      material: 'Leather',
       otherImgs: [
         'assets/images/shoe_imgs/5_1.png',
         'assets/images/shoe_imgs/5_2.png',
@@ -218,6 +233,9 @@ class Products with ChangeNotifier {
       price: 70.90,
       storeId: '2',
       reviews: [1, 2, 3],
+      condition: 'New',
+      heavy: '300g',
+      material: 'Leather',
       otherImgs: [
         'assets/images/shoe_imgs/6_1.png',
         'assets/images/shoe_imgs/6_2.png',
@@ -253,6 +271,9 @@ class Products with ChangeNotifier {
       price: 20.90,
       storeId: '3',
       reviews: [1, 2, 3],
+      condition: 'New',
+      heavy: '400g',
+      material: 'Leather',
       otherImgs: [
         'assets/images/shoe_imgs/7_1.png',
         'assets/images/shoe_imgs/8_3.png',
@@ -288,6 +309,9 @@ class Products with ChangeNotifier {
       price: 40.90,
       storeId: '2',
       reviews: [1, 2, 3],
+      condition: 'New',
+      heavy: '400g',
+      material: 'Leather',
       otherImgs: [
         'assets/images/shoe_imgs/11_1.png',
         'assets/images/shoe_imgs/11_2.png',
@@ -323,6 +347,9 @@ class Products with ChangeNotifier {
       price: 50.90,
       storeId: '2',
       reviews: [1, 2, 3],
+      condition: 'New',
+      heavy: '400g',
+      material: 'Leather',
       otherImgs: [
         'assets/images/shoe_imgs/12_1.png',
         'assets/images/shoe_imgs/12_2.png',
@@ -357,6 +384,9 @@ class Products with ChangeNotifier {
       price: 70.90,
       storeId: '3',
       reviews: [1, 2, 3],
+      condition: 'New',
+      heavy: '400g',
+      material: 'Leather',
       otherImgs: [
         'assets/images/shoe_imgs/13_1.png',
         'assets/images/shoe_imgs/13_2.png',
