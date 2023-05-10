@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
+import 'package:shoe_stores/constants/enums/prod_location.dart';
 import 'package:shoe_stores/views/widgets/product_grid_builder.dart';
 import '../../constants/color.dart';
 import '../../models/product.dart';
@@ -267,6 +268,7 @@ class AboutItemTab extends StatelessWidget {
           SizedBox(
             height: size.height / 3,
             child: ProductGridBuilder(
+              prodLocation: ProdLocation.recommendedProducts,
               products: products,
               productsData: productData,
               categoryData: categoryData,

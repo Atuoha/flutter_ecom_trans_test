@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shoe_stores/views/widgets/single_product_grid.dart';
 
+import '../../constants/enums/prod_location.dart';
 import '../../controllers/route_manager.dart';
 import '../../models/product.dart';
 import '../../providers/cart.dart';
@@ -14,12 +15,14 @@ class ProductGridBuilder extends StatelessWidget {
     required this.productsData,
     required this.categoryData,
     required this.cartData,
+    required this.prodLocation,
   }) : super(key: key);
 
   final List<Product> products;
   final Products productsData;
   final Categories categoryData;
   final Cart cartData;
+  final ProdLocation prodLocation;
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +39,13 @@ class ProductGridBuilder extends StatelessWidget {
         return InkWell(
           onTap: () => Navigator.of(context).pushNamed(
             RouteManager.productDetails,
-            arguments: {'product_id': item.id},
+            arguments: {
+              'product_id': item.id,
+              'prodLocation': prodLocation,
+            },
           ),
           child: SingleProductGrid(
+            prodLocation: prodLocation,
             item: item,
             productsData: productsData,
             categoryData: categoryData,

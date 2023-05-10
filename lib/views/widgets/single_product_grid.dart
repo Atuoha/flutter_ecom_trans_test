@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../constants/color.dart';
+import '../../constants/enums/prod_location.dart';
 import '../../models/product.dart';
 import '../../providers/cart.dart';
 import '../../providers/category.dart';
@@ -15,12 +16,14 @@ class SingleProductGrid extends StatelessWidget {
     required this.productsData,
     required this.categoryData,
     required this.cartData,
+    required this.prodLocation,
   }) : super(key: key);
 
   final Product item;
   final Products productsData;
   final Categories categoryData;
   final Cart cartData;
+  final ProdLocation prodLocation;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +55,7 @@ class SingleProductGrid extends StatelessWidget {
             child: Column(
               children: [
                 GestureDetector(
-                  onTap: () => productsData.toggleIsFavorite(item.id),
+                  onTap: () => productsData.toggleIsFavorite(item.id,prodLocation),
                   child: Icon(
                     item.isFavorite ? Icons.favorite : Icons.favorite_border,
                     color: item.isFavorite ? notifBg : iconColor,

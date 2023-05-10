@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shoe_stores/resources/styles_manager.dart';
 import '../../constants/color.dart';
+import '../../constants/enums/prod_location.dart';
 import '../../controllers/route_manager.dart';
 import '../../models/product.dart';
 import '../../providers/cart.dart';
@@ -84,6 +85,7 @@ class ProductDetailsState extends State<ProductDetails>
     var data =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     String id = data['product_id'];
+    ProdLocation prodLocation = data['prodLocation'];
     var productData = Provider.of<Products>(context);
     var storeData = Provider.of<Stores>(context);
     var cartData = Provider.of<Cart>(context);
@@ -129,7 +131,7 @@ class ProductDetailsState extends State<ProductDetails>
         ),
         actions: [
           GestureDetector(
-            onTap: () => productData.toggleIsFavorite(product.id),
+            onTap: () => productData.toggleIsFavorite(product.id, prodLocation),
             // toggling isFavorite from product provider
             child: Icon(
               product.isFavorite ? Icons.favorite : Icons.favorite_border,

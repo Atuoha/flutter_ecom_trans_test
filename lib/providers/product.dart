@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:shoe_stores/models/shipping_information.dart';
 
+import '../constants/enums/prod_location.dart';
 import '../models/product.dart';
 
 class Products with ChangeNotifier {
-  void toggleIsFavorite(String id) async {
-    Product product =
-        _availableProducts.firstWhere((product) => product.id == id);
+  void toggleIsFavorite(String id, ProdLocation prodLocation) async {
+    Product product;
+    if (prodLocation == ProdLocation.availableProducts) {
+      product = _availableProducts.firstWhere((product) => product.id == id);
+    } else {
+      product = _recommendProducts.firstWhere((product) => product.id == id);
+    }
+    //
+    // Product product =
+    //     _availableProducts.firstWhere((product) => product.id == id);
     product.toggleFavorite();
     notifyListeners();
   }
@@ -45,7 +53,7 @@ class Products with ChangeNotifier {
       ],
       price: 50.90,
       storeId: '2',
-      reviews: ['1','2','3'],
+      reviews: ['1', '2', '3'],
       condition: 'New',
       heavy: '400g',
       material: 'Leather',
@@ -82,7 +90,7 @@ class Products with ChangeNotifier {
       ],
       price: 70.90,
       storeId: '3',
-      reviews: ['1','2','3'],
+      reviews: ['1', '2', '3'],
       condition: 'New',
       heavy: '400g',
       material: 'Leather',
@@ -127,7 +135,7 @@ class Products with ChangeNotifier {
       ],
       price: 30.90,
       storeId: '1',
-      reviews: ['1','2','3'],
+      reviews: ['1', '2', '3'],
       condition: 'New',
       heavy: '400g',
       material: 'Leather',
@@ -165,7 +173,7 @@ class Products with ChangeNotifier {
       ],
       price: 20.90,
       storeId: '2',
-      reviews: ['1','2','3'],
+      reviews: ['1', '2', '3'],
       condition: 'New',
       heavy: '300g',
       material: 'Fiber',
@@ -204,7 +212,7 @@ class Products with ChangeNotifier {
       ],
       price: 60.90,
       storeId: '3',
-      reviews: ['1','2','3'],
+      reviews: ['1', '2', '3'],
       condition: 'New',
       heavy: '200g',
       material: 'Leather',
@@ -242,7 +250,7 @@ class Products with ChangeNotifier {
       ],
       price: 90.90,
       storeId: '1',
-      reviews: ['1','2','3'],
+      reviews: ['1', '2', '3'],
       condition: 'New',
       heavy: '100g',
       material: 'Silk',
@@ -277,7 +285,7 @@ class Products with ChangeNotifier {
       ],
       price: 50.90,
       storeId: '2',
-      reviews: ['1','2','3'],
+      reviews: ['1', '2', '3'],
       condition: 'New',
       heavy: '120g',
       material: 'Leather',
@@ -315,7 +323,7 @@ class Products with ChangeNotifier {
       ],
       price: 70.90,
       storeId: '2',
-      reviews: ['1','2','3'],
+      reviews: ['1', '2', '3'],
       condition: 'New',
       heavy: '300g',
       material: 'Leather',
@@ -353,7 +361,7 @@ class Products with ChangeNotifier {
       ],
       price: 20.90,
       storeId: '3',
-      reviews: ['1','2','3'],
+      reviews: ['1', '2', '3'],
       condition: 'New',
       heavy: '400g',
       material: 'Leather',
@@ -391,7 +399,7 @@ class Products with ChangeNotifier {
       ],
       price: 40.90,
       storeId: '2',
-      reviews: ['1','2','3'],
+      reviews: ['1', '2', '3'],
       condition: 'New',
       heavy: '400g',
       material: 'Leather',
@@ -429,7 +437,7 @@ class Products with ChangeNotifier {
       ],
       price: 50.90,
       storeId: '2',
-      reviews: ['1','2','3'],
+      reviews: ['1', '2', '3'],
       condition: 'New',
       heavy: '400g',
       material: 'Leather',
@@ -466,7 +474,7 @@ class Products with ChangeNotifier {
       ],
       price: 70.90,
       storeId: '3',
-      reviews: ['1','2','3'],
+      reviews: ['1', '2', '3'],
       condition: 'New',
       heavy: '400g',
       material: 'Leather',

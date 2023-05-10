@@ -1,0 +1,4 @@
+enum ProdLocation{
+  availableProducts,
+  recommendedProducts,
+}

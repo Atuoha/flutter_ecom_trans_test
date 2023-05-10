@@ -11,6 +11,7 @@ import 'package:shoe_stores/views/widgets/search_box.dart';
 import 'package:shoe_stores/views/widgets/single_icon_section.dart';
 import '../../resources/values_manager.dart';
 import '../constants/color.dart';
+import '../constants/enums/prod_location.dart';
 import '../models/carousel_item.dart';
 import '../models/icon_section.dart';
 import '../models/product.dart';
@@ -186,6 +187,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                     SizedBox(
                       height: size.height / 1.49,
                       child: ProductGridBuilder(
+                        prodLocation: ProdLocation.availableProducts,
                         products: products,
                         productsData: productsData,
                         categoryData: categoryData,
