@@ -6,8 +6,6 @@ import '../../providers/cart.dart';
 import '../../resources/font_manager.dart';
 import '../../resources/styles_manager.dart';
 
-
-
 class ProductDetailsBottomSheet extends StatelessWidget {
   const ProductDetailsBottomSheet({
     Key? key,
