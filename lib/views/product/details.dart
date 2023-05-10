@@ -24,12 +24,45 @@ class ProductDetails extends StatefulWidget {
 }
 
 class ProductDetailsState extends State<ProductDetails>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   var currentImageIndex = 0; // for storing current index of the image
   TabController? _tabController;
 
   var currentReviewTag = 'Popular';
   List<String> reviewTags = ['Popular', 'Trending', 'Latest', 'Yesterday'];
+
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Initialize the animation controller with a duration of 500 milliseconds
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
+
+    // Initialize the animation to fade from 0 to 1 while sliding up from 50 pixels below the view
+    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeIn,
+      ),
+    );
+
+    // Start the animation
+    _controller.forward();
+
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   // change review tag
   void changeReviewTag(String value) {
@@ -43,12 +76,6 @@ class ProductDetailsState extends State<ProductDetails>
     setState(() {
       currentImageIndex = index;
     });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 2, vsync: this);
   }
 
   @override
@@ -122,137 +149,153 @@ class ProductDetailsState extends State<ProductDetails>
         ],
       ),
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              productDetailsImageSection(
-                size,
-                product,
-                currentImageIndex,
-                setImageIndex,
-              ),
-              const SizedBox(height: 15),
-              Wrap(
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: [
-                  const Icon(Icons.storefront, color: storeColor),
-                  const SizedBox(width: 10),
-                  Text(
-                    storeData.findById(product.storeId).name,
-                    style: getRegularStyle(color: storeColor),
-                  )
-                ],
-              ),
-              const SizedBox(height: 10),
-              Text(
-                product.name,
-                style: getMediumStyle(
-                  color: accentColor,
-                  fontSize: FontSize.s20,
+      body: AnimatedBuilder(
+        animation: _animation,
+        builder: (context, child) => SlideTransition(
+          position: Tween<Offset>(
+            begin: const Offset(0, 1),
+            end: Offset.zero,
+          ).animate(CurvedAnimation(
+            parent: _controller,
+            curve: Curves.easeOut,
+          )),
+          child: Opacity(
+            opacity: _animation.value,
+            child: child,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                productDetailsImageSection(
+                  size,
+                  product,
+                  currentImageIndex,
+                  setImageIndex,
                 ),
-              ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Wrap(
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.star,
-                        color: starBg,
-                        // size: 15,
-                      ),
-                      const SizedBox(width: 3),
-                      Text(
-                        '${product.rating} Ratings',
-                        style: getRegularStyle(
-                          color: greyFontColor,
-                          fontWeight: FontWeight.w500,
-                          fontSize: FontSize.s16,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Text(
-                    '•',
-                    style: getRegularStyle(
-                      color: greyFontColor,
-                      fontWeight: FontWeight.w500,
-                      fontSize: FontSize.s25,
-                    ),
-                  ),
-                  Text(
-                    '${product.reviews.length}k Reviews',
-                    style: getRegularStyle(
-                      color: greyFontColor,
-                      fontWeight: FontWeight.w500,
-                      fontSize: FontSize.s16,
-                    ),
-                  ),
-                  Text(
-                    '•',
-                    style: getRegularStyle(
-                      color: greyFontColor,
-                      fontWeight: FontWeight.w500,
-                      fontSize: FontSize.s25,
-                    ),
-                  ),
-                  Text(
-                    '${product.soldNumber}k Sold',
-                    style: getRegularStyle(
-                      color: greyFontColor,
-                      fontWeight: FontWeight.w500,
-                      fontSize: FontSize.s16,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 15),
-              TabBar(
-                controller: _tabController,
-                tabs: const [
-                  Tab(text: 'About Item'),
-                  Tab(text: 'Reviews'),
-                ],
-                unselectedLabelColor: greyFontColor,
-                indicatorColor: primaryColor,
-                labelColor: primaryColor,
-                labelStyle: const TextStyle(fontWeight: FontWeight.w700),
-              ),
-              SizedBox(
-                height: size.height * 1.6,
-                child: TabBarView(
-                  controller: _tabController,
+                const SizedBox(height: 15),
+                Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
-                    // ABOUT PRODUCT TAB
-                    AboutItemTab(
-                      product: product,
-                      categoryData: categoryData,
-                      storeData: storeData,
-                      size: size,
-                      products: products,
-                      productData: productData,
-                      cartData: cartData,
-                      navigateToStore: navigateToStore,
+                    const Icon(Icons.storefront, color: storeColor),
+                    const SizedBox(width: 10),
+                    Text(
+                      storeData.findById(product.storeId).name,
+                      style: getRegularStyle(color: storeColor),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  product.name,
+                  style: getMediumStyle(
+                    color: accentColor,
+                    fontSize: FontSize.s20,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.star,
+                          color: starBg,
+                          // size: 15,
+                        ),
+                        const SizedBox(width: 3),
+                        Text(
+                          '${product.rating} Ratings',
+                          style: getRegularStyle(
+                            color: greyFontColor,
+                            fontWeight: FontWeight.w500,
+                            fontSize: FontSize.s16,
+                          ),
+                        ),
+                      ],
                     ),
-
-                    // REVIEW TAB
-                    reviewTab(
-                      product: product,
-                      size: size,
-                      reviewData: reviewData,
-                      currentReviewTag: currentReviewTag,
-                      reviewTags: reviewTags,
-                      changeReviewTag: changeReviewTag,
+                    Text(
+                      '•',
+                      style: getRegularStyle(
+                        color: greyFontColor,
+                        fontWeight: FontWeight.w500,
+                        fontSize: FontSize.s25,
+                      ),
+                    ),
+                    Text(
+                      '${product.reviews.length}k Reviews',
+                      style: getRegularStyle(
+                        color: greyFontColor,
+                        fontWeight: FontWeight.w500,
+                        fontSize: FontSize.s16,
+                      ),
+                    ),
+                    Text(
+                      '•',
+                      style: getRegularStyle(
+                        color: greyFontColor,
+                        fontWeight: FontWeight.w500,
+                        fontSize: FontSize.s25,
+                      ),
+                    ),
+                    Text(
+                      '${product.soldNumber}k Sold',
+                      style: getRegularStyle(
+                        color: greyFontColor,
+                        fontWeight: FontWeight.w500,
+                        fontSize: FontSize.s16,
+                      ),
                     ),
                   ],
                 ),
-              ),
-            ],
+                const SizedBox(height: 15),
+                TabBar(
+                  controller: _tabController,
+                  tabs: const [
+                    Tab(text: 'About Item'),
+                    Tab(text: 'Reviews'),
+                  ],
+                  unselectedLabelColor: greyFontColor,
+                  indicatorColor: primaryColor,
+                  labelColor: primaryColor,
+                  labelStyle: const TextStyle(fontWeight: FontWeight.w700),
+                ),
+                SizedBox(
+                  height: size.height * 1.6,
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: [
+                      // ABOUT PRODUCT TAB
+                      AboutItemTab(
+                        product: product,
+                        categoryData: categoryData,
+                        storeData: storeData,
+                        size: size,
+                        products: products,
+                        productData: productData,
+                        cartData: cartData,
+                        navigateToStore: navigateToStore,
+                      ),
+
+                      // REVIEW TAB
+                      reviewTab(
+                        product: product,
+                        size: size,
+                        reviewData: reviewData,
+                        currentReviewTag: currentReviewTag,
+                        reviewTags: reviewTags,
+                        changeReviewTag: changeReviewTag,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

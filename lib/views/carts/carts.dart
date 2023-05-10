@@ -54,9 +54,20 @@ class CartScreenState extends State<CartScreen> {
           },
         ),
         title: const Text('Cart'),
-        actions: const [
-          CartIcon(),
-          SizedBox(width: 18),
+        actions: [
+          const CartIcon(),
+          const SizedBox(width: 10),
+          GestureDetector(
+            onTap: () => Navigator.of(context).pushNamed(
+              RouteManager.orderScreen,
+            ),
+            child: const Icon(
+              Icons.shopping_cart_checkout,
+              color: iconColor,
+              size: 30,
+            ),
+          ),
+          const SizedBox(width: 18),
         ],
       ),
       backgroundColor: Colors.white,
