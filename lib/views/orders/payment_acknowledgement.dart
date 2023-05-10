@@ -29,6 +29,14 @@ class PaymentAcknowledgementScreenState
             );
           },
         ),
+        actions: const [
+           Icon(
+            Icons.print,
+            color: iconColor,
+            size: 30,
+          ),
+          SizedBox(width:18),
+        ]
       ),
       backgroundColor: Colors.white,
       body: Padding(

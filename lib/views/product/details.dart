@@ -17,6 +17,8 @@ import '../widgets/product_details_bottom_sheet.dart';
 import '../widgets/product_details_img_section.dart';
 import 'package:readmore/readmore.dart';
 
+import '../widgets/rating_item.dart';
+
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key});
 
@@ -444,6 +446,7 @@ class ProductDetailsState extends State<ProductDetails>
                           ),
                           const SizedBox(height: 20),
                           Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -484,12 +487,48 @@ class ProductDetailsState extends State<ProductDetails>
                                         const EdgeInsets.only(right: 1.0),
                                     onRatingUpdate: (double value) {},
                                   ),
-                                 const SizedBox(height: 30),
-                                  Text('${product.reviews.length}k Reviews')
+                                  const SizedBox(height: 30),
+                                  Text(
+                                    '${product.reviews.length}k Reviews',
+                                    style: getRegularStyle(
+                                        color: greyFontColor,
+                                        fontSize: FontSize.s16),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(width: 10),
+                              Column(
+                                children: const [
+                                  RatingItem(
+                                    index: '5',
+                                    figure: '1.5k',
+                                    progressValue: 0.8,
+                                  ),
+                                  RatingItem(
+                                    index: '4',
+                                    figure: '710',
+                                    progressValue: 0.4,
+                                  ),
+                                  RatingItem(
+                                    index: '3',
+                                    figure: '140',
+                                    progressValue: 0.3,
+                                  ),
+                                  RatingItem(
+                                    index: '2',
+                                    figure: '100',
+                                    progressValue: 0.2,
+                                  ),
+                                  RatingItem(
+                                    index: '1',
+                                    figure: '120',
+                                    progressValue: 0.1,
+                                  ),
                                 ],
                               ),
                             ],
-                          )
+                          ),
+
                         ],
                       ),
                     ),
