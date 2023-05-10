@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shoe_stores/views/widgets/text_action.dart';
 import '../../constants/color.dart';
+import '../../constants/enums/prod_location.dart';
 import '../../constants/enums/yes_no.dart';
 import '../../controllers/route_manager.dart';
 import '../../models/cart_item.dart';
@@ -65,7 +66,7 @@ class SingleCartItem extends StatelessWidget {
       child: InkWell(
         onTap: () => Navigator.of(context).pushNamed(
           RouteManager.productDetails,
-          arguments: {'product_id': item.productId},
+          arguments: {'product_id': item.productId, 'prodLocation': ProdLocation.availableProducts,},
         ),
         child: Card(
           child: Padding(
