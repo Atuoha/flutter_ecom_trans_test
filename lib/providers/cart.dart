@@ -21,6 +21,16 @@ class Cart extends ChangeNotifier {
     return total;
   }
 
+  int findItemQuantity(String productId) {
+    var quantity = 0;
+    _items.forEach((key, value) {
+      if (key == productId) {
+        quantity = value.quantity;
+      }
+    });
+    return quantity;
+  }
+
   void toggleQuantity(String id, String operation) {
     switch (operation) {
       case 'increment':

@@ -77,7 +77,7 @@ class ProductDetailsBottomSheet extends StatelessWidget {
                             color: Colors.white),
                         const SizedBox(width: 15),
                         Text(
-                          cartData.itemCount.toString(),
+                          cartData.findItemQuantity(product.id).toString(),
                           style: getRegularStyle(
                             color: Colors.white,
                           ),

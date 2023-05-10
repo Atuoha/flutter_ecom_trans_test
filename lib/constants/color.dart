@@ -21,6 +21,6 @@ const starBg = Color(0XFFF39E3C);
 const otherImgsBg = Color(0XFFCBCBCC);
 const storeColor = Color(0XFFABACB1);
 
-var primaryOpacity = const Color(0xFF4CB298).withOpacity(0.8);
+var primaryOpacity = const Color(0xFF4CB298).withOpacity(0.2);
 const primaryLite = Color(0xFFA8C1BF);
 const notifBg = Color(0xFFE45A87);

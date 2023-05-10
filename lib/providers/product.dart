@@ -27,13 +27,88 @@ class Products with ChangeNotifier {
     return _availableProducts.where((product) => product.isFavorite).toList();
   }
 
-  List<Product> recommendProducts(String prodId) {
-    return availableProducts.where((product) => product.id == prodId).toList();
-  }
+  List<Product> get recommendProducts => [..._recommendProducts];
 
+  final List<Product> _recommendProducts = [
+    Product(
+      id: 'p9',
+      name: 'Ultra Nike',
+      imageUrl: 'assets/images/shoe_imgs/12_1.png',
+      description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in velit ut quam convallis sollicitudin. Aliquam pretium velit euismod purus faucibus, in elementum libero pharetra. Curabitur auctor semper felis a suscipit.',
+      descriptionList: [
+        'Lorem ipsum dolor sit amet',
+        'Curabitur auctor semper felis a suscipit',
+        'Sed luctus quam vitae mauris imperdiet',
+        'Proin quis ipsum eget turpis varius egestas',
+        'Fusce tristique aliquam quam, ut convallis diam',
+      ],
+      price: 50.90,
+      storeId: '2',
+      reviews: ['1','2','3'],
+      condition: 'New',
+      heavy: '400g',
+      material: 'Leather',
+      otherImgs: [
+        'assets/images/shoe_imgs/12_1.png',
+        'assets/images/shoe_imgs/12_2.png',
+        'assets/images/shoe_imgs/12_3.png',
+        'assets/images/shoe_imgs/12_5.png',
+        'assets/images/shoe_imgs/12_6.png',
+      ],
+      colorName: 'Blue shade',
+      brandName: 'Smart nike',
+      catId: '4',
+      soldNumber: 120,
+      shippingInformation: ShippingInformation(
+        delivery: 'Shipping from Lorem ipsum dolor',
+        shipping: 'FREE International Shipping',
+        arrival: 'Estimated arrival on 25-27 Oct 2023',
+      ),
+      rating: 2.3,
+    ),
+    Product(
+      id: 'p10',
+      name: 'Nike Sleeve',
+      imageUrl: 'assets/images/shoe_imgs/13_1.png',
+      description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in velit ut quam convallis sollicitudin. Aliquam pretium velit euismod purus faucibus, in elementum libero pharetra. Curabitur auctor semper felis a suscipit.',
+      descriptionList: [
+        'Lorem ipsum dolor sit amet',
+        'Curabitur auctor semper felis a suscipit',
+        'Sed luctus quam vitae mauris imperdiet',
+        'Proin quis ipsum eget turpis varius egestas',
+        'Fusce tristique aliquam quam, ut convallis diam',
+      ],
+      price: 70.90,
+      storeId: '3',
+      reviews: ['1','2','3'],
+      condition: 'New',
+      heavy: '400g',
+      material: 'Leather',
+      otherImgs: [
+        'assets/images/shoe_imgs/13_1.png',
+        'assets/images/shoe_imgs/13_2.png',
+        'assets/images/shoe_imgs/13_3.png',
+        'assets/images/shoe_imgs/13_4.png',
+      ],
+      colorName: 'Black',
+      brandName: 'Grey nike',
+      catId: '3',
+      soldNumber: 15,
+      shippingInformation: ShippingInformation(
+        delivery: 'Shipping from Lorem ipsum dolor',
+        shipping: 'FREE International Shipping',
+        arrival: 'Estimated arrival on 25-27 Oct 2023',
+      ),
+      rating: 4.0,
+    ),
+  ];
 
   List<Product> storeProducts(String storeId) {
-    return availableProducts.where((product) => product.storeId == storeId).toList();
+    return availableProducts
+        .where((product) => product.storeId == storeId)
+        .toList();
   }
 
   final List<Product> _availableProducts = [
@@ -52,7 +127,7 @@ class Products with ChangeNotifier {
       ],
       price: 30.90,
       storeId: '1',
-      reviews: [1, 2, 3],
+      reviews: ['1','2','3'],
       condition: 'New',
       heavy: '400g',
       material: 'Leather',
@@ -90,7 +165,7 @@ class Products with ChangeNotifier {
       ],
       price: 20.90,
       storeId: '2',
-      reviews: [1, 2, 3],
+      reviews: ['1','2','3'],
       condition: 'New',
       heavy: '300g',
       material: 'Fiber',
@@ -111,7 +186,7 @@ class Products with ChangeNotifier {
         shipping: 'FREE International Shipping',
         arrival: 'Estimated arrival on 25-27 Oct 2023',
       ),
-      rating: 4.5,
+      rating: 2.5,
       isFavorite: true,
     ),
     Product(
@@ -129,7 +204,7 @@ class Products with ChangeNotifier {
       ],
       price: 60.90,
       storeId: '3',
-      reviews: [1, 2, 3],
+      reviews: ['1','2','3'],
       condition: 'New',
       heavy: '200g',
       material: 'Leather',
@@ -167,7 +242,7 @@ class Products with ChangeNotifier {
       ],
       price: 90.90,
       storeId: '1',
-      reviews: [1, 2, 3],
+      reviews: ['1','2','3'],
       condition: 'New',
       heavy: '100g',
       material: 'Silk',
@@ -202,7 +277,7 @@ class Products with ChangeNotifier {
       ],
       price: 50.90,
       storeId: '2',
-      reviews: [1, 2, 3],
+      reviews: ['1','2','3'],
       condition: 'New',
       heavy: '120g',
       material: 'Leather',
@@ -223,7 +298,7 @@ class Products with ChangeNotifier {
         shipping: 'FREE International Shipping',
         arrival: 'Estimated arrival on 25-27 Oct 2023',
       ),
-      rating: 2.3,
+      rating: 1.3,
     ),
     Product(
       id: 'p6',
@@ -240,7 +315,7 @@ class Products with ChangeNotifier {
       ],
       price: 70.90,
       storeId: '2',
-      reviews: [1, 2, 3],
+      reviews: ['1','2','3'],
       condition: 'New',
       heavy: '300g',
       material: 'Leather',
@@ -278,7 +353,7 @@ class Products with ChangeNotifier {
       ],
       price: 20.90,
       storeId: '3',
-      reviews: [1, 2, 3],
+      reviews: ['1','2','3'],
       condition: 'New',
       heavy: '400g',
       material: 'Leather',
@@ -299,7 +374,7 @@ class Products with ChangeNotifier {
         shipping: 'FREE International Shipping',
         arrival: 'Estimated arrival on 25-27 Oct 2023',
       ),
-      rating: 5.0,
+      rating: 3.0,
     ),
     Product(
       id: 'p8',
@@ -316,7 +391,7 @@ class Products with ChangeNotifier {
       ],
       price: 40.90,
       storeId: '2',
-      reviews: [1, 2, 3],
+      reviews: ['1','2','3'],
       condition: 'New',
       heavy: '400g',
       material: 'Leather',
@@ -354,7 +429,7 @@ class Products with ChangeNotifier {
       ],
       price: 50.90,
       storeId: '2',
-      reviews: [1, 2, 3],
+      reviews: ['1','2','3'],
       condition: 'New',
       heavy: '400g',
       material: 'Leather',
@@ -391,7 +466,7 @@ class Products with ChangeNotifier {
       ],
       price: 70.90,
       storeId: '3',
-      reviews: [1, 2, 3],
+      reviews: ['1','2','3'],
       condition: 'New',
       heavy: '400g',
       material: 'Leather',

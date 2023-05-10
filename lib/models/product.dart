@@ -18,7 +18,7 @@ class Product with ChangeNotifier {
   final List<String> descriptionList;
   final double price;
   final double rating;
-  final List<int> reviews;
+  final List<String> reviews;
   final double soldNumber;
   final ShippingInformation shippingInformation;
   bool isFavorite;

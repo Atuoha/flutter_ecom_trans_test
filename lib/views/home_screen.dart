@@ -1,15 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shoe_stores/controllers/route_manager.dart';
 import 'package:shoe_stores/resources/styles_manager.dart';
 import 'package:shoe_stores/views/widgets/carousel_single_slider.dart';
 import 'package:shoe_stores/views/widgets/cart_icon.dart';
 import 'package:shoe_stores/views/widgets/k_dotsIndicator.dart';
 import 'package:shoe_stores/views/widgets/message_icon.dart';
+import 'package:shoe_stores/views/widgets/product_grid_builder.dart';
 import 'package:shoe_stores/views/widgets/search_box.dart';
 import 'package:shoe_stores/views/widgets/single_icon_section.dart';
-import 'package:shoe_stores/views/widgets/single_product_grid.dart';
 import '../../resources/values_manager.dart';
 import '../constants/color.dart';
 import '../models/carousel_item.dart';
@@ -186,30 +185,11 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                     const SizedBox(height: 10),
                     SizedBox(
                       height: size.height / 1.49,
-                      child: GridView.builder(
-                        itemCount: products.length,
-                        padding: const EdgeInsets.only(top: 10),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 30,
-                          crossAxisSpacing: 15,
-                        ),
-                        itemBuilder: (context, index) {
-                          Product item = products[index];
-                          return InkWell(
-                            onTap: () => Navigator.of(context).pushNamed(
-                              RouteManager.productDetails,
-                              arguments: {'product_id': item.id},
-                            ),
-                            child: SingleProductGrid(
-                              item: item,
-                              productsData: productsData,
-                              categoryData: categoryData,
-                              cartData: cartData,
-                            ),
-                          );
-                        },
+                      child: ProductGridBuilder(
+                        products: products,
+                        productsData: productsData,
+                        categoryData: categoryData,
+                        cartData: cartData,
                       ),
                     ),
                   ],
